@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="universityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="course">
+    <Key>
+      <PropertyRef Name="idCourse" />
+    </Key>
+    <Property Name="idCourse" Type="int" Nullable="false" />
+    <Property Name="courseTitle" Type="varchar" MaxLength="50" />
+    <Property Name="courseSemester" Type="varchar" MaxLength="50" />
+    <Property Name="professors_AFM" Type="int" />
+  </EntityType>
+  <EntityType Name="course_has_student">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="courseID" Type="int" />
+    <Property Name="students_registrationNumber" Type="int" />
+    <Property Name="grade" Type="int" />
+    <Property Name="id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="professors">
+    <Key>
+      <PropertyRef Name="AFM" />
+    </Key>
+    <Property Name="AFM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="surename" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="department" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="users_username" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="secretaries">
+    <Key>
+      <PropertyRef Name="phonenumber" />
+    </Key>
+    <Property Name="phonenumber" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="surename" Type="varchar" MaxLength="50" />
+    <Property Name="department" Type="varchar" MaxLength="50" />
+    <Property Name="USERS_USERNAME" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="students">
+    <Key>
+      <PropertyRef Name="registrationNumber" />
+    </Key>
+    <Property Name="registrationNumber" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="surname" Type="varchar" MaxLength="50" />
+    <Property Name="department" Type="varchar" MaxLength="50" />
+    <Property Name="USERS_USERNAME" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="role" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_course_has_student_course">
+    <End Role="course" Type="Self.course" Multiplicity="0..1" />
+    <End Role="course_has_student" Type="Self.course_has_student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="course">
+        <PropertyRef Name="idCourse" />
+      </Principal>
+      <Dependent Role="course_has_student">
+        <PropertyRef Name="courseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_course_has_student_students">
+    <End Role="students" Type="Self.students" Multiplicity="0..1" />
+    <End Role="course_has_student" Type="Self.course_has_student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="students">
+        <PropertyRef Name="registrationNumber" />
+      </Principal>
+      <Dependent Role="course_has_student">
+        <PropertyRef Name="students_registrationNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_course_professors">
+    <End Role="professors" Type="Self.professors" Multiplicity="0..1" />
+    <End Role="course" Type="Self.course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="professors">
+        <PropertyRef Name="AFM" />
+      </Principal>
+      <Dependent Role="course">
+        <PropertyRef Name="professors_AFM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_professors_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="professors" Type="Self.professors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="professors">
+        <PropertyRef Name="users_username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_secretaries_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="secretaries" Type="Self.secretaries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="secretaries">
+        <PropertyRef Name="USERS_USERNAME" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_students_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="students" Type="Self.students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="students">
+        <PropertyRef Name="USERS_USERNAME" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="universityModelStoreContainer">
+    <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="course_has_student" EntityType="Self.course_has_student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="professors" EntityType="Self.professors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="secretaries" EntityType="Self.secretaries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_course_has_student_course" Association="Self.FK_course_has_student_course">
+      <End Role="course" EntitySet="course" />
+      <End Role="course_has_student" EntitySet="course_has_student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_course_has_student_students" Association="Self.FK_course_has_student_students">
+      <End Role="students" EntitySet="students" />
+      <End Role="course_has_student" EntitySet="course_has_student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_course_professors" Association="Self.FK_course_professors">
+      <End Role="professors" EntitySet="professors" />
+      <End Role="course" EntitySet="course" />
+    </AssociationSet>
+    <AssociationSet Name="FK_professors_users" Association="Self.FK_professors_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="professors" EntitySet="professors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_secretaries_users" Association="Self.FK_secretaries_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="secretaries" EntitySet="secretaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_students_users" Association="Self.FK_students_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="students" EntitySet="students" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

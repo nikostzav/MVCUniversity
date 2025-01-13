@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="daf535ede71443169d8b5ffc009ff34d" Name="Diagram1">
+        <EntityTypeShape EntityType="universityModel.course" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="universityModel.course_has_student" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="universityModel.professor" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="universityModel.secretary" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="universityModel.student" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="universityModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="universityModel.user" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="universityModel.FK_course_has_student_course" ManuallyRouted="false" />
+        <AssociationConnector Association="universityModel.FK_course_professors" ManuallyRouted="false" />
+        <AssociationConnector Association="universityModel.FK_course_has_student_students" ManuallyRouted="false" />
+        <AssociationConnector Association="universityModel.FK_professors_users" ManuallyRouted="false" />
+        <AssociationConnector Association="universityModel.FK_secretaries_users" ManuallyRouted="false" />
+        <AssociationConnector Association="universityModel.FK_students_users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

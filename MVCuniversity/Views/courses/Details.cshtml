@@ -1,0 +1,50 @@
+﻿@model MVCuniversity.Models.course
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>course</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.courseTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.courseTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.courseSemester)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.courseSemester)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.course_has_students.course_idCourse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.course_has_students.course_idCourse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.professor.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.professor.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idCourse }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

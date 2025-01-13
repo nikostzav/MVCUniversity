@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MVCuniversity.Models.course_has_student>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink(MVCuniversity.Controllers.course_has_studentController.Message, "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.grade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.course.courseTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.students_registrationNumber)
+        </th>
+        
+        <th></th>
+    </tr>
+    @foreach (var item in Model){
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.grade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.course.courseTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.students_registrationNumber)
+        </td>
+        
+    </tr>
+
+        }
+
+</table>

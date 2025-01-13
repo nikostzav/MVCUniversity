@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MVCuniversity.Models.user>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<li>
+    <a href="@Url.Action("Index", "professors")" class="elements">
+        <span>Professors</span>
+    </a>
+</li>
+
+<li>
+    <a href="@Url.Action("Index", "students")" class="elements">
+        <span>Students</span>
+    </a>
+</li>
+
+<li>
+    <a href="@Url.Action("Index", "secretaries")" class="elements">
+        <span>Admin</span>
+    </a>
+</li>
+
+<li>
+    <a href="@Url.Action("Index", "courses")" class="elements">
+        <span>Courses</span>
+    </a>
+</li>
